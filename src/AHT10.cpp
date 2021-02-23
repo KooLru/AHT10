@@ -192,7 +192,8 @@ float AHT10::readHumidity(bool readI2C)
 
   if (humidity < 0)   return 0;
   if (humidity > 100) return 100;
-                      return humidity;
+
+  return humidity;
 }
 
 
@@ -286,7 +287,8 @@ bool AHT10::setCycleMode(void)
   #endif
 
   if (Wire.endTransmission(true) != 0) return false;             //safety check, make sure transmission complete
-                                       return true;
+
+  return true;
 }
 
 
@@ -331,7 +333,8 @@ uint8_t AHT10::getCalibrationBit(bool readI2C)
   if (readI2C == AHT10_FORCE_READ_DATA) _rawDataBuffer[0] = readStatusByte(); //force to read status byte
 
   if (_rawDataBuffer[0] != AHT10_ERROR) return bitRead(_rawDataBuffer[0], 3); //get 3-rd bit
-                                        return AHT10_ERROR;
+  
+  return AHT10_ERROR;
 }
 
 
@@ -365,7 +368,8 @@ bool AHT10::enableFactoryCalCoeff()
 
   /*check calibration enable */
   if (getCalibrationBit() == 0x01) return true;
-                                   return false;
+
+  return false;
 }
 
 
@@ -385,5 +389,6 @@ uint8_t AHT10::getBusyBit(bool readI2C)
   if (readI2C == AHT10_FORCE_READ_DATA) _rawDataBuffer[0] = readStatusByte(); //force to read status byte
 
   if (_rawDataBuffer[0] != AHT10_ERROR) return bitRead(_rawDataBuffer[0], 7); //get 7-th bit
-                                        return AHT10_ERROR;
+
+  return AHT10_ERROR;
 }
